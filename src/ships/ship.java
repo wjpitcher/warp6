@@ -2,18 +2,19 @@ package ships;
 
 import board.Node;
 
-public class ship {
+public class Ship {
 	private int speed;
 	private int maxSpeed;
 	private int points;
 	protected Node location;
 
-	public ship(int maxSpeed, int points){
+	public Ship(int maxSpeed, int points){
 		this.maxSpeed = maxSpeed;
 		this.points = points;
+		roll();
 	}
 
-	public ship(int maxSpeed, int points, Node location){
+	public Ship(int maxSpeed, int points, Node location){
 		this(maxSpeed, points);
 		this.location = location;
 	}
@@ -29,6 +30,9 @@ public class ship {
 	public boolean incrementable(){	return speed < maxSpeed; }
 	public boolean decrementable(){ return speed > 1; }
 	
+	public boolean movable(){return location.moveable(speed);}
+
+	public int getIndex(){return location.index();}
 	public boolean increment(){
 		if(!incrementable())
 			return false;
@@ -49,7 +53,8 @@ public class ship {
 			points = 0;
 		}
 		else 
-			location.move(speed);
+			location = location.move(speed);
+		
 	}
 	
 	private void roll(){
