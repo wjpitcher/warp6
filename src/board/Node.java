@@ -36,7 +36,7 @@ public class Node {
 	}
 	
     public boolean moveable(int moves){
-    	return _index - moves > 0;
+    	return _index - moves >= 0;
     }
     
     public Node move(int moves){
