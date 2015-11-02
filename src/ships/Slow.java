@@ -1,7 +1,7 @@
 package ships;
 import board.Node;
 
-public class Slow extends ship {
+public class Slow extends Ship {
 	private final static int _POINTS = 3;
 	private final static int _MAXSPEED = 4;
 		

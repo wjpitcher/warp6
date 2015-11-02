@@ -1,6 +1,6 @@
 package main;
 import board.*;
-import ships.ship;
+import ships.Ship;
 
 public class Main {
 
@@ -12,12 +12,20 @@ public class Main {
 	
 	public static void test1(){
 		board warpBoard = new board(100);
-		Node Ship = warpBoard.firstAvailableNode();
+		Ship ship = new Ship(4,1, warpBoard.firstAvailableNode());
 		
-		while(Ship.moveable(1) )
-			System.out.println(Ship.index());
-			Ship = Ship.move(1);
-			
+		System.out.println("Ship Speed:" + ship.getSpeed());
+		
+		while(ship.getIndex() > 0 ){
+			if(ship.movable()){
+				ship.move();
+				System.out.println("Ship moved to: " + ship.getIndex());
+			}
+			else{
+				ship.decrement();
+				System.out.println("Ship reduced speed to " + ship.getSpeed());
+			}
+		}
 	}
 
 }
