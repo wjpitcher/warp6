@@ -27,6 +27,11 @@ public class Ship {
 		return points;
 	}
 	
+	public int getIndex(){
+		return location.index();
+	}
+	
+	public boolean movable() {return location.moveable(speed);}
 	public boolean incrementable(){	return speed < maxSpeed; }
 	public boolean decrementable(){ return speed > 1; }
 	
@@ -54,7 +59,7 @@ public class Ship {
 		}
 		else 
 			location = location.move(speed);
-		
+
 	}
 	
 	private void roll(){
