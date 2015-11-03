@@ -3,14 +3,14 @@ package ships;
 import board.Node;
 
 public class Ship {
-	private int speed;
-	private int maxSpeed;
-	private int points;
+	private int _speed;
+	private int _maxSpeed;
+	private int _points;
 	protected Node location;
 
 	public Ship(int maxSpeed, int points){
-		this.maxSpeed = maxSpeed;
-		this.points = points;
+		this._maxSpeed = maxSpeed;
+		this._points = points;
 		roll();
 	}
 
@@ -20,51 +20,43 @@ public class Ship {
 	}
 
 	public int getSpeed(){
-		return speed;
+		return _speed;
 	}
 	
 	public int getPoints(){
-		return points;
+		return _points;
 	}
 	
-	public int getIndex(){
-		return location.index();
-	}
+	public boolean incrementable(){	return _speed < _maxSpeed; }
+	public boolean decrementable(){ return _speed > 1; }
 	
-	public boolean movable() {return location.moveable(speed);}
-	public boolean incrementable(){	return speed < maxSpeed; }
-	public boolean decrementable(){ return speed > 1; }
-	
-	public boolean movable(){return location.moveable(speed);}
+	public boolean movable(){return location.moveable(_speed);}
 
 	public int getIndex(){return location.index();}
 	public boolean increment(){
 		if(!incrementable())
 			return false;
-		speed++;
+		_speed++;
 		return true;
 	}
 
 	public boolean decrement(){
 		if(!decrementable())
 			return false;
-		speed--;
+		_speed--;
 		return true;
 	}
 	
 	public void move(){
-		if(!location.moveable(speed)){
+		if(!location.moveable(_speed)){
 			location = null;
-			points = 0;
+			_points = 0;
 		}
 		else 
-			location = location.move(speed);
-
+			location = location.move(_speed);
 	}
 	
 	private void roll(){
-		speed = (int)(Math.random() * maxSpeed + 1);
+		_speed = (int)(Math.random() * _maxSpeed + 1);
 	}
-	
-	
 }

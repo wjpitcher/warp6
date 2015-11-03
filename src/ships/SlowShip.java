@@ -1,16 +1,16 @@
 package ships;
 import board.Node;
 
-public class Slow extends Ship {
-	private final static int _POINTS = 3;
+public class SlowShip extends Ship {
+	private final static int _POINTS = 1;
 	private final static int _MAXSPEED = 4;
 		
-	public Slow(Node location){
+	public SlowShip(Node location){
 		super(_MAXSPEED, _POINTS);
 		this.location = location;
 	}
 	
-	public Slow(){
+	public SlowShip(){
 		super(_MAXSPEED, _POINTS);
 	}
 	
