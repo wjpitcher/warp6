@@ -23,7 +23,7 @@ public class TestResult {
 		DateFormat df = new SimpleDateFormat(_DATEFORMAT);
 		_end =  new Date();
 		_report += "\nEnd: " + df.format(_end)
-		         + "\nElapse time: " + (long)(_end.getTime() - _start.getTime()) + "milliseconds";
+		         + "\nElapse time: " + (long)(_end.getTime() - _start.getTime()) + " ms";
 		
 	}
 	

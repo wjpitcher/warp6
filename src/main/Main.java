@@ -6,9 +6,8 @@ public class Main {
 
 	public static void main(String[] args) {
 		Tests tests = new Tests();
-		System.out.println(tests.runTests());
-		
 
+		System.out.println(tests.runTests());
 	}
 	
 	public static void test1(){

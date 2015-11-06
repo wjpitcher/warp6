@@ -1,7 +1,7 @@
 package ships;
 
 import board.Node;
-import ship.Ship;
+import ships.Ship;
 
 public class FastShip extends Ship {
 	private final static int _POINTS = 1;

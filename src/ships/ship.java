@@ -33,6 +33,7 @@ public class Ship {
 	public boolean movable(){return location.moveable(_speed);}
 
 	public int getIndex(){return location.index();}
+	public void setLocation(Node newLocation){ location = newLocation; }
 	public boolean increment(){
 		if(!incrementable())
 			return false;
