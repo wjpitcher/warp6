@@ -23,9 +23,33 @@ public class board {
 		return firstNode;
 	}
 	
-	private int getBumpIndex(int index){
-		return 0;
+	public int getBumpIndex(int index){
+		int ring = getRing(index);
+		return (index + Math.max((ring - 2), 0) )/ring + (ring -1)* 3;
 	}
 
+	public int getRing(int index){
+		int previous = 0;
+		int ring = 0;
+		
+		while(index > (ring * 6) + previous ){
+			previous += ring * 6;
+			ring++;
+		}
+		
+		return ring;
+	}
+
+	public int maxIndex(int ringCount){
+		int max = 0;
+		
+		for(int i = 1; i <= ringCount; i++){
+			max += i * 6;
+		}
+		
+		return max;
+	}
+	
+	
 }
 
