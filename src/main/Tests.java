@@ -73,30 +73,6 @@ public class Tests {
 		}
 	}
 
-	public String testTranslateRing(board newBoard){
-		TestResult test = new TestResult();
-		try{
-			int[] rings = createMaxIndexKey();
-			test.setResult(true);
-			
-			for(int i = 1; i <= rings.length; i++ ){
-				if(rings[i] != newBoard.maxIndex(i)){
-					test.addComment("Ring: " + i + " returned: " + newBoard.maxIndex(i) + " Expected: " + rings[i]);
-					test.setResult(false);
-				}
-				
-			}
-		} catch(Exception e){
-			test.setException(e);
-		}
-
-
-		if(!test.getResult())
-			return "Translate Ring Fail\n" + test.report();
-		else
-			return "Translate Ring Pass\n";
-	}
-
 	public int[] createTranslateRingKey(){
 		int[] rings = {0, 0, 0, 0, 0, 0, 
 				1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 9, 9, 10, 11, 11, 12, 13, 13, 14, 15, 15, 16, 17, 17, 
@@ -107,23 +83,62 @@ public class Tests {
 		return rings;
 	}
 	
+	public String testTranslateRing(board newBoard){
+		TestResult test = new TestResult();
+		try{
+			int[] rings = createMaxIndexKey();
+			test.setResult(true);
+			
+			for(int i = 1; i < rings.length; i++ ){
+				if(rings[i] != newBoard.maxIndex(i)){
+					test.addComment("Ring: " + i + " returned: " + newBoard.maxIndex(i) + " Expected: " + rings[i]);
+					test.setResult(false);
+				}				
+			}
+		} catch(Exception e){
+			test.setException(e);
+		}
+
+		if(!test.getResult())
+			return "Translate Ring Fail\n" + test.report();
+		else
+			return "Translate Ring Pass\n";
+	}
+
+		
+	public int[] createMaxIndexKey(){ return createMaxIndexKey(6, 6); }
+		
+	public int[] createMaxIndexKey(int maxRing, int ringSize){
+		int[] rings = new int[maxRing+1];
+		rings[0] = 0;
+		for(int i = 1; i < rings.length; i++ )
+			rings[i] = rings[i -1] + ringSize * i ;
+		
+		return rings;
+	}
+	
 	public String testMaxIndex(board testboard){ return testMaxIndex(testboard, 6, 6); }
 	
 	public String testMaxIndex(board testboard, int maxRing, int ringSize){
 		TestResult test = new TestResult();
+		int[] rings = null;
 		test.setResult(true);
+		test.addComment("Get first Node: " + testboard.firstAvailableNode().index());
 		
 		try{
-			int[] rings = createMaxIndexKey(maxRing, ringSize);
-		
-			for(int i = 1; i <= rings.length; i++ ){
+			rings = createMaxIndexKey(); //maxRing, ringSize
+			for(int i = 1; i < rings.length; i++ ){
 				if(rings[i] != testboard.maxIndex(i)){
 					test.addComment("Ring: " + i + " returned: " + testboard.maxIndex(i) + " Expected: " + rings[i]);
 					test.setResult(false);
 				}
+				else {
+					test.addComment("Ring: " + i + " returned: " + testboard.maxIndex(i) + " passed");
+				}
 			}
 		}
 		catch(Exception e){
+			test.addComment("Failed to complete the test");
 			test.setException(e);
 		}
 
@@ -132,16 +147,6 @@ public class Tests {
 		else
 			return "Max Index Pass\n";
 	}
-	
-	public int[] createMaxIndexKey(){ return createMaxIndexKey(6, 6); }
-		
-	public int[] createMaxIndexKey(int maxRing, int ringSize){
-		int[] rings = new int[maxRing];
-		
-		for(int i = 1; i <= rings.length; i++ )
-			rings[i] = rings[i -1] + ringSize;
-		
-		return rings;
-	}
+
 }
 

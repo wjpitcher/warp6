@@ -16,28 +16,27 @@ public class TestResult {
 	public void start(){
 	     DateFormat df = new SimpleDateFormat(_DATEFORMAT);
 		_start =  new Date();
-		_report = "Start: " + df.format(_start);
+		_report = "Start: " + df.format(_start) + "\n";
 	}
 	
 	public void end(){
 		DateFormat df = new SimpleDateFormat(_DATEFORMAT);
 		_end =  new Date();
-		_report += "\nEnd: " + df.format(_end)
-		         + "\nElapse time: " + (long)(_end.getTime() - _start.getTime()) + " ms";
-		
+		_report += "End: " + df.format(_end)
+		         + "\nElapse time: " + (long)(_end.getTime() - _start.getTime()) + " ms\n";
 	}
 	
 	public void addComment(String comment){
-		_report += "\n" + comment;
+		_report += comment + "\n" ;
 	}
 	
 	public String report(){
-		return _report + "\n";
+		return _report;
 	}
 
 	public void setException(Exception error){
 		_result = false;
-		_report += "\nError: " + error.toString();  
+		_report += "Error: " + error.toString() + "\n";  
 		_error = error;
 	}
 	
