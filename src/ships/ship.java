@@ -8,6 +8,8 @@ public class Ship {
 	private int _points;
 	protected Node location;
 
+	protected int index;
+	
 	public Ship(int maxSpeed, int points){
 		this._maxSpeed = maxSpeed;
 		this._points = points;
@@ -32,7 +34,10 @@ public class Ship {
 	
 	public boolean movable(){return location.moveable(_speed);}
 
-	public int getIndex(){return location.index();}
+	public int getIndex(){return index /*location.index()*/;}
+
+	public void setIndex(int index){this.index = index; }
+	
 	public void setLocation(Node newLocation){ location = newLocation; }
 	public boolean increment(){
 		if(!incrementable())
