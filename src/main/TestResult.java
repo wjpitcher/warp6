@@ -37,7 +37,7 @@ public class TestResult {
 
 	public void setException(Exception error){
 		_result = false;
-		_report += "\nError: " + error.getMessage();  
+		_report += "\nError: " + error.toString();  
 		_error = error;
 	}
 	

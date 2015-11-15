@@ -116,7 +116,6 @@ public class Tests {
 		try{
 			int[] rings = createMaxIndexKey(maxRing, ringSize);
 		
-			
 			for(int i = 1; i <= rings.length; i++ ){
 				if(rings[i] != testboard.maxIndex(i)){
 					test.addComment("Ring: " + i + " returned: " + testboard.maxIndex(i) + " Expected: " + rings[i]);
@@ -127,7 +126,6 @@ public class Tests {
 		catch(Exception e){
 			test.setException(e);
 		}
-		
 
 		if(!test.getResult())
 			return "Max Index Fail\n" + test.report();
