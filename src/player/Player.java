@@ -1,6 +1,7 @@
 package player;
 
 import java.awt.Color;
+import java.util.Arrays;
 
 import ships.Ship;
 
@@ -22,17 +23,13 @@ public class Player {
 	
 	public Ship[] ships(){ return _ships;}
 	
-	public void Add(Ship ship){
-		Ship[] ships;
-		
+	public void Add(Ship ship){	
 		if(_ships == null)
-			ships = new Ship[1];
+			_ships = new Ship[1];	
 		else
-			ships = new Ship[_ships.length + 1];
+			_ships = Arrays.copyOf(_ships, _ships.length + 1);
 		
-		ships = _ships.clone();
-		ships[ships.length -1] = ship;
-		_ships = ships;
+		_ships[_ships.length -1] = ship;
 	}
 	
 	
