@@ -8,7 +8,7 @@ import ships.Ship;
 public class Player {
 	private String _name  = "";
 	private Color _color;
-	private Ship[] _ships;
+	private Ship[] _ships = {};
 	
 	public Player(String name, Color color){
 		_name = name;
