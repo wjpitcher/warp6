@@ -82,7 +82,6 @@ public class Tests {
 				77, 78, 79, 80, 81, 81, 82, 83, 84, 85, 86, 86, 87, 88, 89, 90};
 		return rings;
 	}
-	
 	public String testTranslateRing(board newBoard){
 		TestResult test = new TestResult();
 		try{
@@ -105,20 +104,21 @@ public class Tests {
 			return "Translate Ring Pass\n";
 	}
 
-		
 	public int[] createMaxIndexKey(){ return createMaxIndexKey(6, 6); }
-		
 	public int[] createMaxIndexKey(int maxRing, int ringSize){
-		int[] rings = new int[maxRing+1];
+		int[] rings = {0, 6, 18, 36, 60, 90, 126};
+		
+		/*
+		rings = new int[maxRing+1];
 		rings[0] = 0;
 		for(int i = 1; i < rings.length; i++ )
 			rings[i] = rings[i -1] + ringSize * i ;
-		
+		*/		
 		return rings;
+
 	}
 	
-	public String testMaxIndex(board testboard){ return testMaxIndex(testboard, 6, 6); }
-	
+	public String testMaxIndex(board testboard){ return testMaxIndex(testboard, 6, 6); }	
 	public String testMaxIndex(board testboard, int maxRing, int ringSize){
 		TestResult test = new TestResult();
 		int[] rings = null;
