@@ -8,7 +8,7 @@ import ships.Ship;
 public class Player {
 	private String _name  = "";
 	private Color _color;
-	private Ship[] _ships = {};
+	public  Ship[] ships = {};
 	
 	public Player(String name, Color color){
 		_name = name;
@@ -20,16 +20,14 @@ public class Player {
 	
 	public String getName() {return _name;}
 	public void setColor(String name) {_name = name;}
-	
-	public Ship[] ships(){ return _ships;}
-	
-	public void Add(Ship ship){	
-		if(_ships == null)
-			_ships = new Ship[1];	
-		else
-			_ships = Arrays.copyOf(_ships, _ships.length + 1);
 		
-		_ships[_ships.length -1] = ship;
+	public void Add(Ship ship){	
+		if(ships == null)
+			ships = new Ship[1];	
+		else
+			ships = Arrays.copyOf(ships, ships.length + 1);
+		
+		ships[ships.length -1] = ship;
 	}
 	
 	

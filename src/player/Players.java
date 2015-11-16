@@ -1,12 +1,12 @@
 package player;
 
 import java.util.Arrays;
-import java.util.Random;
 
+import board.Board;
 import ships.*;
 
 public class Players {
-	private Player[] _players = {};
+	public Player[] players = {};
 	
 	private Fleet fleet;
 	
@@ -18,31 +18,36 @@ public class Players {
 	}
 	
 	public void Add(Player player){	
-		if(_players == null)
-			_players = new Player[1];	
+		if(players == null)
+			players = new Player[1];	
 		else
-			_players = Arrays.copyOf(_players, _players.length + 1);
+			players = Arrays.copyOf(players, players.length + 1);
 		
-		_players[_players.length -1] = player;
+		players[players.length -1] = player;
 	}
 	
-	public void setup(){
-		Ship[][] ships = new Ship[_players.length][9];
-
-		for(int i = 0; i < _players.length; i++){
-			for(int j = 0; j < ships[_players.length].length; j++){
-				ships[i] = fleet.generateFleet(shipColor)
+	public boolean setup(Board board){
+		for(int i = 0; i < players.length; i++){
+			try{
+				players[i].ships = fleet.generateFleet();
+			} catch(Exception e) {
+				System.out.println(i + ": " + e.toString());
+				return false;
 			}
 		}
+		
+		
+		return true;
 	}
 	
 	public boolean isNodeOpen(int index){
 		
-		for (int i = 0; i < _players.length; i++)
-			for(int j = 0; j < _players[i].ships().length; j++)
-				if(_players[i].ships()[j].getIndex() == index)
+		for (int i = 0; i < players.length; i++)
+			for(int j = 0; j < players[i].ships.length; j++)
+				if(players[i].ships[j].getIndex() == index)
 					return false;
 		
 		return true;
 	}
+
 }

@@ -18,18 +18,18 @@ public class Fleet {
 	public void add(String shipType, int qty){	
 		manifest = Arrays.copyOf(manifest, manifest.length + qty);
 		
-		for(int i = manifest.length - qty; i < manifest.length - 1; i++)
+		for(int i = manifest.length - qty ; i < manifest.length ; i++)
 			manifest[i] = shipType;
 	}
 	
 	public Ship[] generateFleet() throws Exception{
-		Ship[] fleet = {} ;
+		Ship[] fleet = new Ship[manifest.length] ;
 		Random rand = new Random();
 		int index;
 		
 		for(int i = 0; i < manifest.length; i++){
 			index = rand.nextInt(manifest.length);
-			
+						
 			for(int j = 0; fleet[index] != null && j < fleet.length ; j++) 
 				index = (index + 1) % fleet.length;
 			
@@ -42,7 +42,7 @@ public class Fleet {
 		return fleet;
 	}
 	
-	public Ship getShip(String shipType) throws Exception{
+	public static Ship getShip(String shipType) throws Exception{
 		if(shipType == "Fast")
 			return new FastShip();
 		else if(shipType == "Medium")

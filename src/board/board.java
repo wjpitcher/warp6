@@ -1,10 +1,10 @@
 package board;
 
-public class board {
+public class Board {
 	private int _nodeCount;
 	private Node[] _map;
 	
-	public board(int nodeCount){
+	public Board(int nodeCount){
 		_nodeCount = nodeCount;
 		_map = new Node[_nodeCount];
 		_map[0] = new Node(0,null, null);

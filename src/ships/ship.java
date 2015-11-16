@@ -2,13 +2,16 @@ package ships;
 
 import board.Node;
 
-public class Ship {
+public abstract class Ship {
 	private int _speed;
 	private int _maxSpeed;
 	private int _points;
 	protected Node location;
 
 	protected int index;
+	
+	public abstract int getMaxSpeed();
+	public abstract String getType();
 	
 	public Ship(int maxSpeed, int points){
 		this._maxSpeed = maxSpeed;
@@ -64,5 +67,9 @@ public class Ship {
 	
 	private void roll(){
 		_speed = (int)(Math.random() * _maxSpeed + 1);
+	}
+	
+	public String toString(){
+		return getType() + ": " + getMaxSpeed();
 	}
 }
