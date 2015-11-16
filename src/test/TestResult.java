@@ -1,4 +1,4 @@
-package main;
+package test;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -9,9 +9,14 @@ public class TestResult {
 	private Date _start;
 	private Date _end;
 	private String _report = "";
-	private boolean _result;
+	private String _title;
+	private boolean _result = true;
 
 	private Exception _error;
+	
+	public TestResult(String title){
+		_title = title;
+	}
 	
 	public void start(){
 	     DateFormat df = new SimpleDateFormat(_DATEFORMAT);
@@ -52,5 +57,12 @@ public class TestResult {
 	public boolean getResult(){
 		return _result;
 	}
-		
+	
+	public String toString(){
+		if(getResult())
+			return _title + " - Pass\n";
+		else
+			return _title + " - Fail\n" + report();
+			
+	}
 }

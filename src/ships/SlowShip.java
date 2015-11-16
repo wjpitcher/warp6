@@ -13,6 +13,16 @@ public class SlowShip extends Ship {
 	public SlowShip(){
 		super(_MAXSPEED, _POINTS);
 	}
+
+	@Override
+	public int getMaxSpeed() {
+		return 4;
+	}
+
+	@Override
+	public String getType() {
+		return "Slow";
+	}
 	
 	
 

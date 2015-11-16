@@ -1,6 +1,7 @@
 package main;
 import board.*;
 import ships.*;
+import test.Tests;
 
 public class Main {
 
@@ -11,7 +12,7 @@ public class Main {
 	}
 	
 	public static void test1(){
-		board warpBoard = new board(100);
+		Board warpBoard = new Board(100);
 		Ship ship = new MediumShip(warpBoard.firstAvailableNode());
 		
 		System.out.println("Ship Speed:" + ship.getSpeed());
@@ -30,7 +31,7 @@ public class Main {
 
 
 	public static void test2(){
-		board warpBoard = new board(100);
+		Board warpBoard = new Board(100);
 		Ship ship = new MediumShip(warpBoard.firstAvailableNode());
 		
 		System.out.println("Ship Speed:" + ship.getSpeed());

@@ -15,4 +15,14 @@ public class MediumShip extends Ship {
 	public MediumShip(){
 		super(_MAXSPEED, _POINTS);
 	}
+
+	@Override
+	public int getMaxSpeed() {
+		return 6;
+	}
+
+	@Override
+	public String getType() {
+		return "Medium";
+	}
 }
