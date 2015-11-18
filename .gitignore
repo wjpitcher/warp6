@@ -1,2 +1,4 @@
 *.[oa]
 *.class
+bin/player/Player.class
+*.class
