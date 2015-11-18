@@ -2,22 +2,24 @@ package test;
 
 import java.awt.Color;
 
-import board.Board;
 import player.Player;
 import player.Players;
+// import board.Board;
 
 public class PlayTest implements Test{
 	
+	
 	@Override
 	public TestResult runTest() {
-		
-		return null;
+		TestResult result = new TestResult("Playthrough Test");
+		playTest(result);
+		return result;
 	}
 	
-	private void playersTest(TestResult result){
+	private void playTest(TestResult result){
 
 		Players players = new Players();
-		Board board = new Board();
+		//Board board = new Board(126);
 		
 		players.Add(new Player("P1", Color.GREEN));
 		players.Add(new Player("P2", Color.RED));

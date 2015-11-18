@@ -10,8 +10,10 @@ public class Tests {
 		result += new RingTest().runTest().toString(); 
 
 		result += new JumpTest().runTest().toString(); 
-		
+
 		result += new FleetTest().runTest().toString(); 
+		
+		result += new PlayTest().runTest().toString(); 
 		
 		return result;
 	}
