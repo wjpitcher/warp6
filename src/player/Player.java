@@ -30,5 +30,17 @@ public class Player {
 		ships[ships.length -1] = ship;
 	}
 	
+	 public Ship[] warpedShips(){
+		 Ship[] warpships = {};
+		 
+		 for(int i = 0; i < ships.length; i++ ){
+			 if(ships[i].getIndex() == 0 ){
+				 warpships = Arrays.copyOf(warpships, warpships.length +1);
+				 warpships[warpships.length -1] = ships[i];
+			 }
+		 }
+		 
+		 return warpships;
+	 }
 	
 }
