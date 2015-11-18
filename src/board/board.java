@@ -3,6 +3,10 @@ package board;
 public class Board {
 	private int _nodeCount;
 	private Node[] _map;
+
+	public Board(){
+		this(126);	
+	}
 	
 	public Board(int nodeCount){
 		_nodeCount = nodeCount;
