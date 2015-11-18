@@ -26,17 +26,22 @@ public class Players {
 		players[players.length -1] = player;
 	}
 	
-	public boolean setup(Board board){
+	public boolean setup(int maxNode){
 		for(int i = 0; i < players.length; i++){
-			try{
+		
+			try {
 				players[i].ships = fleet.generateFleet();
-			} catch(Exception e) {
-				System.out.println(i + ": " + e.toString());
+			} catch (Exception e) {
+				System.out.println(e.toString());
 				return false;
 			}
+			for(int j = 0; j < players[i].ships.length; j++){
+				// maxnode - current Ship Index * the number of players 
+				//         - current Players Index 
+				players[i].ships[j].setIndex(maxNode - j * players.length - i);
+			}
 		}
-		
-		
+	
 		return true;
 	}
 	
