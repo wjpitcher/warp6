@@ -2,12 +2,12 @@ package player;
 
 import java.util.Arrays;
 
-import board.Board;
+//import board.Board;
 import ships.*;
 
 public class Players {
 	public Player[] players = {};
-	
+	public Player activePlayer = null;
 	private Fleet fleet;
 	
 	public Players(){
@@ -54,5 +54,4 @@ public class Players {
 		
 		return true;
 	}
-
 }
