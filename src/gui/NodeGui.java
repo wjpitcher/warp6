@@ -13,9 +13,17 @@ public class NodeGui {
 		setLoc(X, Y, width, height);
 	}	
 
+	public NodeGui(double X, double Y){
+		setLoc(X, Y);
+	}	
+
 	public void setLoc(int X, int Y, int width, int height){
-		this.X = (double) X / width;
-		this.Y = (double) Y / height;
+		setLoc((double) X / width, (double) Y / height);
+	}	
+	
+	public void setLoc(double X, double Y){
+		this.X = X;
+		this.Y = Y;
 	}	
 
 	public boolean MouseOver(int X, int Y, int width, int height ){
@@ -41,8 +49,8 @@ public class NodeGui {
 		else 
 			g.setColor(Color.RED);
 		
-		g.fillOval(nodeX - radius/2
-				 , nodeY - radius/2
+		g.fillOval(nodeX - radius / 2
+				 , nodeY - radius / 2
 				 , radius, radius);
 
 		if(MouseOver(X, Y, width, height))
@@ -50,15 +58,18 @@ public class NodeGui {
 		else 
 			g.setColor(Color.CYAN);
 
-		g.drawOval(nodeX - radius/2
-				 , nodeY - radius/2
+		g.drawOval(nodeX - radius / 2
+				 , nodeY - radius / 2
 				 , radius, radius);
 		
 		g.setColor(originalColor);
+		System.out.println(this.toString() 
+			           + " Actual: (" + nodeX + ", " + nodeY + ")"
+			           + " Board: (" + width + ", " + height + ")");
 	}
 	
 	@Override
 	public String toString(){
-		return "(" + X + ", " + Y + ")";
+		return X + " " + Y ;
 	}
 }
