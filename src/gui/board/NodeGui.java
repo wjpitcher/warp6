@@ -1,4 +1,4 @@
-package gui;
+package gui.board;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -63,9 +63,6 @@ public class NodeGui {
 				 , radius, radius);
 		
 		g.setColor(originalColor);
-		System.out.println(this.toString() 
-			           + " Actual: (" + nodeX + ", " + nodeY + ")"
-			           + " Board: (" + width + ", " + height + ")");
 	}
 	
 	@Override

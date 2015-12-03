@@ -1,6 +1,8 @@
 package gui.ships;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -39,7 +41,7 @@ public class FastShipGui extends ShipGui {
 	public Ship getShip() {
 		return ship;
 	}
-
+	
 	@Override
 	protected Image buildShipImage() {
 		return shipImage;

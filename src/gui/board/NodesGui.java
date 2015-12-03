@@ -1,4 +1,4 @@
-package gui;
+package gui.board;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -32,7 +32,7 @@ public class NodesGui {
 	}
 	
 	public void Add(NodeGui node){
-		System.out.println("Add: " + node.toString());
+		//System.out.println("Add: " + node.toString());
 		
 		if(_nodes.length == _lastNode)
 			_nodes = Arrays.copyOf(_nodes, _nodes.length * 2);
@@ -82,10 +82,10 @@ public class NodesGui {
 			       , int width, int height, int radius){
 	
 		for(int i = 0; i < _lastNode; i++){
-			// if(_nodes[i].MouseOver(X, Y, radius)){
+			 if(_nodes[i].MouseOver(X, Y, width, height, radius)){
 				System.out.println(_nodes[i]);
 				_nodes[i].draw(g, X, Y, width, height, radius);
-			//}
+			}
 		}
 	}
 }

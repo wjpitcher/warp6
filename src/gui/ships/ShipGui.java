@@ -1,5 +1,6 @@
 package gui.ships;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -39,8 +40,9 @@ public abstract class ShipGui extends JComponent {
 	}
 	
 	public Image getShipRotImage(int width, int height, double scale){
-				return getShipImage(width, height,  scale);
+		return getShipImage(width, height,  scale);
 	}
+	
 	//@Override
 	public void draw(Graphics g, int width, int height, double scale){
 		/*
@@ -54,10 +56,20 @@ public abstract class ShipGui extends JComponent {
 	    g2d.drawImage(shipImage, rot, null);
 	    */
 
-	    
+
 		
 		g.drawImage(getShipImage(width, height, scale)
 				  , (int)(_X * width),(int) (_Y * height), null);
+	}
+	
+
+	@Override
+	public void paint(Graphics g){
+		this.setPreferredSize(new Dimension(buildShipImage().getWidth(null), buildShipImage().getHeight(null)));
+
+		g.drawImage(buildShipImage(), (this.getWidth() - buildShipImage().getWidth(null)) / 2
+				             , (this.getHeight() - buildShipImage().getHeight(null)) / 2
+				             , null);
 	}
 	
 }

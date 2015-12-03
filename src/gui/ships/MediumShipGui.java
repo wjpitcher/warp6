@@ -23,7 +23,7 @@ public class MediumShipGui extends ShipGui {
 	public void setShipColor(Color playerColor){
 		try {
 			if(playerColor == Color.BLUE)
-				shipImage = ImageIO.read(new File("img\\Ship\\MediumshipBlue.png"));
+				shipImage = ImageIO.read(new File("img\\Ship\\MediumShipBlue.png"));
 			else if(playerColor == Color.RED)
 				shipImage = ImageIO.read(new File("img\\Ship\\MediumshipRed.png")); 
 			else if(playerColor == Color.YELLOW)

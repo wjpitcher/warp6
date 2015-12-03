@@ -1,5 +1,6 @@
-package gui;
+package gui.board;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
@@ -22,15 +23,18 @@ implements MouseListener, MouseMotionListener {
 	private NodesGui _nodes = new NodesGui("coord.txt");			
 			
 	public BoardGui(){
-		//_Board = new Board();
 		this.addMouseListener(this);
 		this.addMouseMotionListener(this);
+		
+		this.setLayout(null);
 		try {
 			imgBoard = ImageIO.read(new File("img/Warp6.png"));
 			setPreferredSize(new Dimension(imgBoard.getWidth(), imgBoard.getHeight()));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		
 	}
 
 	@Override
@@ -67,26 +71,26 @@ implements MouseListener, MouseMotionListener {
 	}
 
 	@Override
-	public void mousePressed(MouseEvent e) {
-		// Start Node Draw
-	}
+	public void mousePressed(MouseEvent e) {/* Not Used */}
 
 	@Override
-	public void mouseReleased(MouseEvent e) {
-		// Save node
-	}
+	public void mouseReleased(MouseEvent e) {/* Not Used */}
 
 	@Override
 	public void mouseDragged(MouseEvent e) {/* Not Used */}
 
-	@Override
-	public void mouseMoved(MouseEvent e) {
-	//	System.out.println("(" + e.getX() + ", " + e.getY() + ")");
-	}
 
 	@Override
 	public void mouseEntered(MouseEvent e)  { /* Not Used */ }
 
 	@Override
 	public void mouseExited(MouseEvent e) { /* Not Used */ }
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+
+
+	System.out.println(e.getX() + " " + e.getY());
+
+	}
 }
