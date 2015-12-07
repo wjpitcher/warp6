@@ -2,71 +2,153 @@ package gui.board;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
-public class NodeGui {
-	public static int radius = 0;
+import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
+
+import board.IBoard;
+import board.INode;
+import board.Node;
+
+public class NodeGui extends GuiElement implements INode {
+	private static final long serialVersionUID = 1L;
+
+	private BufferedImage imgNormal;
+	private BufferedImage imgMouseOver;
 	
 	public double X;
 	public double Y;
-
-	public NodeGui(int X, int Y, int width, int height){
-		setLoc(X, Y, width, height);
+	public INode _node;
+	
+	public NodeGui(int index, IBoard board, int X, int Y, double ratio){
+		this(new Node(index, board.getNextNode(index), board.getBumpNode(index))
+		   , X, Y, ratio);
 	}	
 
-	public NodeGui(double X, double Y){
-		setLoc(X, Y);
-	}	
-
-	public void setLoc(int X, int Y, int width, int height){
-		setLoc((double) X / width, (double) Y / height);
+	public NodeGui(int index, IBoard board, double X, double Y, double ratio){
+		this(new Node(index, board.getNextNode(index), board.getBumpNode(index))
+		   , X, Y, ratio);
 	}	
 	
-	public void setLoc(double X, double Y){
-		this.X = X;
-		this.Y = Y;
+	public NodeGui(INode node, int X, int Y, double ratio){
+		super(X, Y, ratio);
+		_node = node;
+		setupImages();
 	}	
 
-	public boolean MouseOver(int X, int Y, int width, int height ){
-		return MouseOver(X, Y, width, height, radius);
+	public NodeGui(INode node, double X, double Y, double ratio){
+		super(X, Y, ratio);
+		_node = node;
+		setupImages();
+	//	System.out.println("Node percent Constructor: " + this.toString());
+	}	
+
+	private void setupImages(){
+		imgNormal =  new BufferedImage(25, 25, 1);
+		Graphics g = imgNormal.getGraphics();
+		
+		g.setColor(Color.RED);
+		g.fillOval(0, 0, 25, 25);
+		
+		g.setColor(Color.PINK);
+		g.drawOval(0, 0, 25, 25);
+
+		g.setColor(Color.BLACK);
+		g.drawString(_node.index()+"", 4, 17);
+		try {
+			imgNormal =  ImageIO.read(new File("img\\Ship\\FastshipRed.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		imgMouseOver =  new BufferedImage(25, 25, 1);
+		g = imgMouseOver.getGraphics();
+		g.setColor(Color.CYAN);
+		g.fillOval(0, 0, 25, 25);
+		
+		g.setColor(Color.BLUE);
+		g.drawOval(0, 0, 25, 25);
+		
+		g.setColor(Color.BLACK);
+		g.drawString(_node.index()+ "", 4, 17);
+		
+		try {
+			imgMouseOver =  ImageIO.read(new File("img\\Ship\\FastshipBlue.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
+
 	
-	public boolean MouseOver(int X, int Y, int width, int height, int radius){
-		int nodeX = (int)(this.X * width);
-		int nodeY = (int)(this.Y * height);
-		
-		return radius < Math.sqrt((nodeX - X) * (nodeX - X)
-				                 + (nodeY - Y) * (nodeY - Y));
+	@Override
+	public BufferedImage getImage() {
+		return imgNormal;
 	}
-	 
-	public void  draw(Graphics g, int X, int Y, int width, int height, int radius){
-		int nodeX = (int)(this.X * width);
-		int nodeY = (int)(this.Y * height);
-		
-		Color originalColor = g.getColor();
-		
-		if(MouseOver(X, Y, width, height))
-			g.setColor(Color.BLUE);
-		else 
-			g.setColor(Color.RED);
-		
-		g.fillOval(nodeX - radius / 2
-				 , nodeY - radius / 2
-				 , radius, radius);
 
-		if(MouseOver(X, Y, width, height))
-			g.setColor(Color.PINK);
-		else 
-			g.setColor(Color.CYAN);
+	@Override
+	public BufferedImage getMouseOverImage() {
+		return imgMouseOver;
+	}
 
-		g.drawOval(nodeX - radius / 2
-				 , nodeY - radius / 2
-				 , radius, radius);
-		
-		g.setColor(originalColor);
+	@Override
+	public void clicked() {
+		JOptionPane.showMessageDialog(this, "Node " + index() + " was clicked");
 	}
 	
 	@Override
 	public String toString(){
-		return X + " " + Y ;
+		return index() + "("  + super.X + " " + super.Y  + ") ratio: "  + super.ratio
+				+ "("  + getHeight() + " " + getWidth()  + ") "
+				+ "("  + getLocation() + ") Parent: " + getParent();
 	}
+
+	@Override
+	public void setNext(INode value) {
+		_node.setNext(value);
+	}
+
+	@Override
+	public INode Next() {
+		return _node.Next();
+	}
+
+	@Override
+	public INode Bump() {
+		return _node.Bump();
+	}
+
+	@Override
+	public void setBump(INode value) {
+		_node.setBump(value);
+	}
+
+	@Override
+	public boolean isOccupied() {
+		return _node.isOccupied();
+	}
+
+	@Override
+	public void setOccupied(boolean value) {
+		_node.setOccupied(value);
+	}
+
+	@Override
+	public int index() {
+		return _node.index();
+	}
+
+	@Override
+	public boolean moveable(int moves) {
+		return _node.moveable(moves);
+	}
+
+	@Override
+	public INode move(int moves) {
+		return _node.move(moves);
+	}
+
 }

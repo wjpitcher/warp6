@@ -1,5 +1,6 @@
 package ships;
 
+import board.INode;
 import board.Node;
 
 public class MediumShip extends Ship {
@@ -7,7 +8,7 @@ public class MediumShip extends Ship {
 	private final static int _POINTS = 2;
 	private final static int _MAXSPEED = 6;
 		
-	public MediumShip(Node location){
+	public MediumShip(INode location){
 		super(_MAXSPEED, _POINTS);
 		this.location = location;
 	}
@@ -18,7 +19,7 @@ public class MediumShip extends Ship {
 
 	@Override
 	public int getMaxSpeed() {
-		return 6;
+		return _MAXSPEED;
 	}
 
 	@Override

@@ -1,8 +1,8 @@
 package board;
 
-public class Board {
+public class Board implements IBoard {
 	private int _nodeCount;
-	private Node[] _map;
+	private INode[] _map;
 
 	public Board(){
 		this(126);	
@@ -18,8 +18,9 @@ public class Board {
 		}		
 	}
 	
-	public Node firstAvailableNode(){
-		Node firstNode = _map[_nodeCount - 1];
+	@Override
+	public INode firstAvailableNode(){
+		INode firstNode = _map[_nodeCount - 1];
 		
 		while(firstNode.isOccupied())
 			firstNode = firstNode.move(1);
@@ -27,11 +28,13 @@ public class Board {
 		return firstNode;
 	}
 	
+	@Override
 	public int getBumpIndex(int index){
 		int ring = getRing(index);
 		return (index + Math.max((ring - 2), 0) )/ring + (ring -1)* 3;
 	}
-
+	
+	@Override
 	public int getRing(int index){
 		int previous = 0;
 		int ring = 0;
@@ -43,17 +46,49 @@ public class Board {
 		
 		return ring;
 	}
-
-	public int maxIndex(int ringCount){
+	
+	@Override
+	public int maxIndex(int ringNumber){
 		int max = 0;
 		
-		for(int i = 1; i <= ringCount; i++){
+		for(int i = 1; i <= ringNumber; i++){
 			max += i * 6;
 		}
 		
 		return max;
 	}
+
+	@Override
+	public INode getNode(int index) {
+		
+		return _map[index];
+	}
+
+	@Override
+	public INode getBumpNode(int index) {
+		if(index > 0)
+			return _map[getBumpIndex(index)];
+		else
+			return null;
+	}
+
+	@Override
+	public INode getNextNode(int index) {
+		if(index > 0)
+			return _map[index -1];
+		else
+			return null;
+	}
 	
-	
+
+	@Override
+	public void setNodes(INode[] nodes) {
+		_map = nodes;
+	}
+
+	@Override
+	public INode[] getNodes() {
+		return _map;
+	}
 }
 

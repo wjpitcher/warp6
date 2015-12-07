@@ -28,8 +28,8 @@ public class PlayTest implements Test{
 				
 		if(players.setup(126)){
 			for(int i = 0; i < players.players.length; i++){
-				if(players.players[i].ships.length != 9){
-					result.addComment(players.players[i].getName() + ": " + players.players[i].ships);
+				if(players.players[i].getShips().length != 9){
+					result.addComment(players.players[i].getName() + ": " + players.players[i].getShips());
 					result.setResult(false);
 				}
 			}
@@ -38,14 +38,16 @@ public class PlayTest implements Test{
 			int indexprevsum = 0;
 			for(int i = 0; i < players.players.length; i++){
 				indexsum = 0;
-				for(int j = 0; j < players.players[i].ships.length; j++){
+				for(int j = 0; j < players.players[i].getShips().length; j++){
+					/*
 					System.out.println( players.players[i].getName() + ": "
-							          + players.players[i].ships[j].getIndex() + " "
-						              + players.players[i].ships[j].getClass() + " "
+							          + players.players[i].getShips()[j].getIndex() + " "
+						              + players.players[i].getShips()[j].getClass() + " "
 					                  );
-					indexsum += players.players[i].ships[j].getIndex();
+					*/                  
+					indexsum += players.players[i].getShips()[j].getIndex();
 				}
-			}	
+			}
 		}
 		else
 			result.setResult(false);

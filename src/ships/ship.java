@@ -1,12 +1,13 @@
 package ships;
 
+import board.INode;
 import board.Node;
 
-public abstract class Ship {
+public abstract class Ship implements IShip{
 	private int _speed;
 	private int _maxSpeed;
 	private int _points;
-	protected Node location;
+	protected INode location;
 
 	protected int index;
 	
@@ -24,24 +25,35 @@ public abstract class Ship {
 		this.location = location;
 	}
 
+	@Override
 	public int getSpeed(){
 		return _speed;
 	}
 	
+	@Override
 	public int getPoints(){
 		return _points;
 	}
 	
+	@Override
 	public boolean incrementable(){	return _speed < _maxSpeed; }
+	
+	@Override
 	public boolean decrementable(){ return _speed > 1; }
 	
+	@Override
 	public boolean movable(){return location.moveable(_speed);}
 
+	@Override
 	public int getIndex(){return index /*location.index()*/;}
 
+	@Override
 	public void setIndex(int index){this.index = index; }
 	
-	public void setLocation(Node newLocation){ location = newLocation; }
+	@Override
+	public void setLocation(INode newLocation){ location = newLocation; }
+	
+	@Override
 	public boolean increment(){
 		if(!incrementable())
 			return false;
@@ -49,6 +61,7 @@ public abstract class Ship {
 		return true;
 	}
 
+	@Override
 	public boolean decrement(){
 		if(!decrementable())
 			return false;
@@ -56,19 +69,21 @@ public abstract class Ship {
 		return true;
 	}
 	
+	@Override
 	public void move(){
 		if(!location.moveable(_speed)){
 			location = null;
 			_points = 0;
 		}
 		else 
-			location = location.move(_speed);
+			location.move(_speed);
 	}
 	
 	private void roll(){
 		_speed = (int)(Math.random() * _maxSpeed + 1);
 	}
 	
+	@Override
 	public String toString(){
 		return getType() + ": " + getMaxSpeed();
 	}

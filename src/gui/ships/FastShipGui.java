@@ -1,27 +1,36 @@
 package gui.ships;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import ships.Ship;
+import gui.board.NodeGui;
+import ships.FastShip;
 
 public class FastShipGui extends ShipGui {
 	private static final long serialVersionUID = 1L;
 
 	public BufferedImage shipImage;
-	private ships.FastShip ship; 
-	
+/*
 	public FastShipGui(Color playerColor){
+		super(new FastShip(), 0, 0);
 		setShipColor(playerColor);
 	}
-	
+*/
+	public FastShipGui(Color playerColor, NodeGui node){
+		super(new FastShip(node), node);
+		setShipColor(playerColor);
+	}
+	/*
+	public FastShipGui(FastShip fastShip, Color playerColor){
+		super(fastShip, 0, 0);
+		setShipColor(playerColor);
+	}
+	*/
 	public void setShipColor(Color playerColor){
 		try {
 			if(playerColor == Color.BLUE)
@@ -36,16 +45,19 @@ public class FastShipGui extends ShipGui {
 			e.printStackTrace();
 		}
 	}
-	
+	/*
 	@Override
-	public Ship getShip() {
-		return ship;
+	public void paint(Graphics g) {
+		super.paint(g);
 	}
-	
+*/
 	@Override
-	protected Image buildShipImage() {
+	public BufferedImage getImage() {
 		return shipImage;
 	}
 
-
+	@Override
+	public BufferedImage getMouseOverImage() {
+		return shipImage;
+	}
 }

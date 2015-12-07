@@ -8,18 +8,25 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import ships.Ship;
+import board.INode;
+import gui.board.NodeGui;
+import ships.MediumShip;
 
 public class MediumShipGui extends ShipGui {
 	private static final long serialVersionUID = 1L;
 
 	public BufferedImage shipImage;
-	private ships.FastShip ship; 
-	
-	public MediumShipGui(Color playerColor){
+
+	public MediumShipGui(Color playerColor, NodeGui node){
+		super(new MediumShip(node), node);
 		setShipColor(playerColor);
 	}
-	
+/*
+	public MediumShipGui(MediumShip mediumShip, Color playerColor){
+		super(mediumShip, 0, 0);
+		setShipColor(playerColor);
+	}
+	*/
 	public void setShipColor(Color playerColor){
 		try {
 			if(playerColor == Color.BLUE)
@@ -34,14 +41,20 @@ public class MediumShipGui extends ShipGui {
 			e.printStackTrace();
 		}
 	}
-	
+/*
 	@Override
-	public Ship getShip() {
-		return ship;
+	public void setLocation(INode newLocation) {
+		super.setLocation(newLocation);
+		
+	}
+*/
+	@Override
+	public BufferedImage getImage() {
+		return shipImage;
 	}
 
 	@Override
-	protected Image buildShipImage() {
+	public BufferedImage getMouseOverImage() {
 		return shipImage;
 	}
 }

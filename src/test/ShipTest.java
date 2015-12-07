@@ -1,7 +1,7 @@
 package test;
 
 import board.Board;
-import ships.Ship;
+import ships.IShip;
 
 public class ShipTest implements Test {
 
@@ -25,6 +25,7 @@ public class ShipTest implements Test {
 			testMoveShip("Fast", test);			
 		}catch(Exception e){
 			test.setException(e);
+			e.printStackTrace();
 		}
 		
 		return test;
@@ -41,11 +42,11 @@ public class ShipTest implements Test {
 		}
 	}
 	
-	public void moveShip(Ship ship, TestResult test){
+	public void moveShip(IShip ship, TestResult test){
 		test.setResult(true);
 
-		Board warpBoard = new Board(100);
-		ship.setLocation(warpBoard.firstAvailableNode());
+		// Board warpBoard = new Board(100);
+		ship.move();
 		
 		try{
 			test.addComment("Ship Speed:" + ship.getSpeed());

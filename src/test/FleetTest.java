@@ -6,6 +6,7 @@ import java.util.Arrays;
 //import board.Board;
 import player.*;
 import ships.Fleet;
+import ships.IShip;
 import ships.Ship;
 
 public class FleetTest implements Test{
@@ -68,7 +69,7 @@ public class FleetTest implements Test{
 		fleet.add("Slow",4);
 		
 		try{ 
-			Ship[] fleets = fleet.generateFleet();
+			IShip[] fleets = fleet.generateFleet();
 			if(fleets.length != 9)
 				if(result.getResult()){
 					result.addComment("Invalid length:" + fleets.length );
@@ -90,8 +91,8 @@ public class FleetTest implements Test{
 				
 		if(players.setup(126)){
 			for(int i = 0; i < players.players.length; i++){
-				if(players.players[i].ships.length != 9){
-					result.addComment(players.players[i].getName() + ": " + players.players[i].ships);
+				if(players.players[i].getShips().length != 9){
+					result.addComment(players.players[i].getName() + ": " + players.players[i].getShips());
 					result.setResult(false);
 				}
 			}
@@ -100,12 +101,8 @@ public class FleetTest implements Test{
 			int indexprevsum = 0;
 			for(int i = 0; i < players.players.length; i++){
 				indexsum = 0;
-				for(int j = 0; j < players.players[i].ships.length; j++){
-					System.out.println( players.players[i].getName() + ": "
-							          + players.players[i].ships[j].getIndex() + " "
-						              + players.players[i].ships[j].getClass() + " "
-					                  );
-					indexsum += players.players[i].ships[j].getIndex();
+				for(int j = 0; j < players.players[i].getShips().length; j++){
+					indexsum += players.players[i].getShips()[j].getIndex();
 				}
 			}	
 		}

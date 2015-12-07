@@ -1,6 +1,6 @@
 package ships;
 
-import board.Node;
+import board.INode;
 import ships.Ship;
 
 public class FastShip extends Ship {
@@ -11,9 +11,9 @@ public class FastShip extends Ship {
 	public String getType(){ return "Fast";}
 	
 	@Override
-	public int getMaxSpeed() {return 8;}
+	public int getMaxSpeed() {return _MAXSPEED;}
 	
-	public FastShip(Node location){
+	public FastShip(INode location){
 		super(_MAXSPEED, _POINTS);
 		this.location = location;
 	}

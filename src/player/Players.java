@@ -1,13 +1,11 @@
 package player;
 
 import java.util.Arrays;
-
-//import board.Board;
 import ships.*;
 
-public class Players {
-	public Player[] players = {};
-	public Player activePlayer = null;
+public class Players implements IPlayers{
+	public IPlayer[] players = {};
+	public int activePlayer = 0;
 	private Fleet fleet;
 	
 	public Players(){
@@ -17,9 +15,9 @@ public class Players {
 		fleet.add("Slow",4);
 	}
 	
-	public void Add(Player player){	
+	public void Add(IPlayer player){	
 		if(players == null)
-			players = new Player[1];	
+			players = new IPlayer[1];	
 		else
 			players = Arrays.copyOf(players, players.length + 1);
 		
@@ -30,15 +28,15 @@ public class Players {
 		for(int i = 0; i < players.length; i++){
 		
 			try {
-				players[i].ships = fleet.generateFleet();
+				players[i].setShips(fleet.generateFleet());
 			} catch (Exception e) {
 				System.out.println(e.toString());
 				return false;
 			}
-			for(int j = 0; j < players[i].ships.length; j++){
+			for(int j = 0; j < players[i].getShips().length; j++){
 				// maxnode - current Ship Index * the number of players 
 				//         - current Players Index 
-				players[i].ships[j].setIndex(maxNode - j * players.length - i);
+				players[i].getShips()[j].setIndex(maxNode - j * players.length - i);
 			}
 		}
 	
@@ -48,10 +46,27 @@ public class Players {
 	public boolean isNodeOpen(int index){
 		
 		for (int i = 0; i < players.length; i++)
-			for(int j = 0; j < players[i].ships.length; j++)
-				if(players[i].ships[j].getIndex() == index)
+			for(int j = 0; j < players[i].getShips().length; j++)
+				if(players[i].getShips()[j].getIndex() == index)
 					return false;
 		
 		return true;
 	}
+
+	@Override
+	public IPlayer[] getPlayers() {
+		
+		return players;
+	}
+
+	@Override
+	public IPlayer getActivePlayers() {
+		return players[activePlayer];
+	}
+
+	@Override
+	public IPlayer NextPlayer() {
+		return players[++activePlayer % players.length];
+	}
+
 }

@@ -1,7 +1,6 @@
-/main/
-/player/
-/ships/
-/test/
 /board/
 /gui/
-/layoutMangers/
+/ships/
+/test/
+/player/
+/main/

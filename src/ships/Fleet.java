@@ -1,10 +1,9 @@
 package ships;
 
-import java.awt.Color;
 import java.util.Arrays;
 import java.util.Random;
 
-import ships.Ship;
+import ships.IShip;
 
 public class Fleet {
 	public String[] manifest = {} ;
@@ -22,8 +21,8 @@ public class Fleet {
 			manifest[i] = shipType;
 	}
 	
-	public Ship[] generateFleet() throws Exception{
-		Ship[] fleet = new Ship[manifest.length] ;
+	public IShip[] generateFleet() throws Exception{
+		IShip[] fleet = new IShip[manifest.length] ;
 		Random rand = new Random();
 		int index;
 		
@@ -42,7 +41,7 @@ public class Fleet {
 		return fleet;
 	}
 	
-	public static Ship getShip(String shipType) throws Exception{
+	public static IShip getShip(String shipType) throws Exception{
 		if(shipType == "Fast")
 			return new FastShip();
 		else if(shipType == "Medium")

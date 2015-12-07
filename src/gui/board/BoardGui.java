@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -13,20 +12,30 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-@SuppressWarnings("serial")
+import board.Board;
+import board.IBoard;
+import board.INode;
+import gui.ships.FastShipGui;
+
 public class BoardGui extends JPanel 
-implements MouseListener, MouseMotionListener {
+ implements IBoard {
+	private static final long serialVersionUID = 1L;
+
 	private int _panelHeight = -1;
 	private int _panelWidth = -1;
-	BufferedImage imgBoard;
+	private BufferedImage imgBoard;
+	private NodesGui _nodes;			
+	private IBoard _board;
 	
-	private NodesGui _nodes = new NodesGui("coord.txt");			
-			
 	public BoardGui(){
-		this.addMouseListener(this);
-		this.addMouseMotionListener(this);
+		this(new Board());
+	}
+	
+	public BoardGui(IBoard board){
+		_board = board;
 		
-		this.setLayout(null);
+		//this.setLayout(null);
+
 		try {
 			imgBoard = ImageIO.read(new File("img/Warp6.png"));
 			setPreferredSize(new Dimension(imgBoard.getWidth(), imgBoard.getHeight()));
@@ -34,22 +43,34 @@ implements MouseListener, MouseMotionListener {
 			e.printStackTrace();
 		}
 		
+		_nodes = new NodesGui(this, "coord.txt");	
+
+		_board.setNodes(_nodes.getNodes());	
+		for(int i = 0 ; i < _nodes.getNodes().length; i++){
+			if(_nodes.getNodes()[i] != null){
+				
+				this.add((NodeGui) _nodes.getNodes()[i]);
+				
+				((NodeGui)_nodes.getNodes()[i]).setVisible(true);
+			}
+		}
+			
+		/*
+		FastShipGui fastShip = new FastShipGui(Color.blue, (NodeGui)_nodes.getNodes()[5]);
+		this.add(fastShip );
+		*/
 		
+		/*
+		System.out.println("Add Test");
+		add(new GuiElement(.25, .25, .25));
+		NodeGui testnode =new NodeGui(1, new Board(), .5, .5, .25) ;
+		add(testnode);
+		*/
 	}
 
 	@Override
-	public void paint(Graphics g){
-		super.paint(g);
-
-		ResizeBoard();
-		
-		g.drawImage(imgBoard, 0, 0
-				  ,  _panelWidth
-				  ,  _panelHeight, null);
-		_nodes.draw(g);
-	}
-	 
-	private void ResizeBoard(){
+	public void paintComponent(Graphics g){
+		super.paintComponent(g);	
 
 		// Check verify the dimensions changed 
 		if(_panelHeight != getSize().height
@@ -57,40 +78,56 @@ implements MouseListener, MouseMotionListener {
 		{		
 			_panelHeight = getSize().height;
 			_panelWidth  = getSize().width;
-			
-			_nodes.setSize(getSize());
-			NodeGui.radius = (int)(.028 * _panelWidth);
 		}
+	
+		// Draw the Board image with the new Dimensions
+		g.drawImage(imgBoard, 0, 0
+				  , _panelWidth
+				  , _panelHeight, null);
+	}
+	 
+	@Override
+	public INode firstAvailableNode() {
+		return _board.firstAvailableNode();
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent e) {
-		_nodes.setLoc(e.getX(), e.getY());
-		_nodes.Add(new NodeGui(e.getX(), e.getY(), _panelWidth, _panelHeight));
-		_nodes.draw(this.getGraphics());
+	public int getBumpIndex(int index) {
+		return _board.getBumpIndex(index);
 	}
 
 	@Override
-	public void mousePressed(MouseEvent e) {/* Not Used */}
+	public int getRing(int index) {
+		return _board.getRing(index);
+	}
 
 	@Override
-	public void mouseReleased(MouseEvent e) {/* Not Used */}
+	public int maxIndex(int ringNumber) {
+		return _board.maxIndex(ringNumber);
+	}
 
 	@Override
-	public void mouseDragged(MouseEvent e) {/* Not Used */}
-
-
-	@Override
-	public void mouseEntered(MouseEvent e)  { /* Not Used */ }
+	public INode getNode(int index) {
+		return _board.getNode(index);
+	}
 
 	@Override
-	public void mouseExited(MouseEvent e) { /* Not Used */ }
+	public INode getBumpNode(int index) {
+		return _board.getBumpNode(index);
+	}
 
 	@Override
-	public void mouseMoved(MouseEvent e) {
+	public INode getNextNode(int index) {
+		return _board.getNextNode(index);
+	}
 
+	@Override
+	public void setNodes(INode[] nodes) {
+		 _board.setNodes(nodes);
+	}
 
-	System.out.println(e.getX() + " " + e.getY());
-
+	@Override
+	public INode[] getNodes() {
+		return _board.getNodes();
 	}
 }

@@ -1,46 +1,56 @@
 package board;
 
-public class Node {
-	private Node _next;
-	private Node _bump;
+public class Node implements INode {
+	private INode _next;
+	private INode _bump;
 	private boolean _occupied = false;	
 	private int _index;
 
-	public Node(int index, Node next, Node bump){
+	public Node(int index, INode next, INode bump){
 		_index = index;
 		_next = next;
 		_bump = bump;
 	}
 	
-	public Node Next(){
+	@Override
+	public INode Next(){
 		return _next;
 	}
 	
-	public void setNext(Node value){
+	@Override
+	public void setNext(INode value){
 		_next = value;
 	}
-	
-	public Node Bump(){
+
+	@Override
+	public INode Bump(){
 		return _bump;
 	}
-	
-	public void setBump(Node value){
+
+	@Override
+	public void setBump(INode value){
 		_bump = value;
 	}
-	
+
+	@Override
 	public boolean isOccupied(){ return _occupied;}
+
+	@Override
 	public void setOccupied(boolean value){ _occupied = value;}
 	
+	@Override
 	public int index(){
 		return _index;
 	}
-	
+
+	@Override
     public boolean moveable(int moves){
     	return _index - moves >= 0;
     }
-    
-    public Node move(int moves){
-    	Node node = Next();
+
+	@Override
+    public INode move(int moves){
+    	INode node = Next();
 	    
     	if(moveable(moves)){
 	    	for(int i = 0; i< moves - 1; i++)
