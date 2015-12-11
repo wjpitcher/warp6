@@ -17,6 +17,8 @@ public class MediumShipGui extends ShipGui {
 
 	public BufferedImage shipImage;
 
+	public BufferedImage shipOverImage;
+
 	public MediumShipGui(Color playerColor, NodeGui node){
 		super(new MediumShip(node), node);
 		setShipColor(playerColor);
@@ -31,13 +33,16 @@ public class MediumShipGui extends ShipGui {
 		try {
 			if(playerColor == Color.BLUE)
 				shipImage = ImageIO.read(new File("img\\Ship\\MediumShipBlue.png"));
+			
+
 			else if(playerColor == Color.RED)
 				shipImage = ImageIO.read(new File("img\\Ship\\MediumshipRed.png")); 
 			else if(playerColor == Color.YELLOW)
 				shipImage = ImageIO.read(new File("img\\Ship\\MediumshipYellow.png")); 
 			else if(playerColor == Color.GREEN)
 				shipImage = ImageIO.read(new File("img\\Ship\\MediumshipGreen.png")); 
-		} catch (IOException e) {
+				shipOverImage  = ImageIO.read(new File("img\\Ship\\MediumshipYellow.png"));
+			} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
@@ -55,6 +60,6 @@ public class MediumShipGui extends ShipGui {
 
 	@Override
 	public BufferedImage getMouseOverImage() {
-		return shipImage;
+		return shipOverImage;
 	}
 }

@@ -1,14 +1,12 @@
 package gui.ships;
 
 import java.awt.Color;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import board.INode;
 import gui.board.NodeGui;
 import ships.SlowShip;
 
@@ -42,19 +40,6 @@ public class SlowShipGui extends ShipGui {
 			e.printStackTrace();
 		}
 	}
-/*
-	@Override
-	protected Image buildShipImage() {
-		return shipImage;
-	}
-
-
-	@Override
-	public void setLocation(INode newLocation) {
-		// TODO Auto-generated method stub
-		
-	}
-	*/
 	
 	@Override
 	public BufferedImage getImage() {

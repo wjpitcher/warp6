@@ -22,6 +22,7 @@ public class NodeGui extends GuiElement implements INode {
 	public double X;
 	public double Y;
 	public INode _node;
+	public boolean paintable = true;
 	
 	public NodeGui(int index, IBoard board, int X, int Y, double ratio){
 		this(new Node(index, board.getNextNode(index), board.getBumpNode(index))
@@ -59,7 +60,7 @@ public class NodeGui extends GuiElement implements INode {
 		g.setColor(Color.BLACK);
 		g.drawString(_node.index()+"", 4, 17);
 		try {
-			imgNormal =  ImageIO.read(new File("img\\Ship\\FastshipRed.png"));
+			imgNormal =  ImageIO.read(new File("img\\Ship\\MediumshipRed.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -83,6 +84,12 @@ public class NodeGui extends GuiElement implements INode {
 		}
 	}
 
+	@Override
+	public void paint(Graphics g){
+		if(paintable)
+			super.paint(g);
+		System.out.println(this + " Node "  );
+	}
 	
 	@Override
 	public BufferedImage getImage() {
@@ -98,54 +105,44 @@ public class NodeGui extends GuiElement implements INode {
 	public void clicked() {
 		JOptionPane.showMessageDialog(this, "Node " + index() + " was clicked");
 	}
-	
+
 	@Override
 	public String toString(){
-		return index() + "("  + super.X + " " + super.Y  + ") ratio: "  + super.ratio
-				+ "("  + getHeight() + " " + getWidth()  + ") "
-				+ "("  + getLocation() + ") Parent: " + getParent();
+		return  index() + ": " + super.toString();
 	}
-
+	
 	@Override
 	public void setNext(INode value) {
 		_node.setNext(value);
 	}
-
 	@Override
 	public INode Next() {
 		return _node.Next();
 	}
-
 	@Override
 	public INode Bump() {
 		return _node.Bump();
 	}
-
 	@Override
 	public void setBump(INode value) {
 		_node.setBump(value);
 	}
-
 	@Override
 	public boolean isOccupied() {
 		return _node.isOccupied();
 	}
-
 	@Override
 	public void setOccupied(boolean value) {
 		_node.setOccupied(value);
 	}
-
 	@Override
 	public int index() {
 		return _node.index();
 	}
-
 	@Override
 	public boolean moveable(int moves) {
 		return _node.moveable(moves);
 	}
-
 	@Override
 	public INode move(int moves) {
 		return _node.move(moves);

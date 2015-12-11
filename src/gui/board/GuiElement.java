@@ -62,6 +62,13 @@ public abstract class GuiElement extends JComponent implements MouseMotionListen
 	public void clicked(){}
 	
 	@Override
+	public String toString(){
+		return  "("  + X + " " + Y  + ") ratio: "  + ratio
+				+ "("  + getHeight() + " " + getWidth()  + ") "
+				+ "("  + getLocation() + ") Parent: " + getParent();
+	}
+	
+	@Override
 	public void mouseClicked(MouseEvent e) {
 		clicked();
 	}
