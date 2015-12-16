@@ -35,6 +35,7 @@ public abstract class ShipGui extends GuiElement implements IShip{
 	public ShipGui(IShip ship, BoardGui board, int index){
 		super(((NodeGui)board.getNode(index)).X
 			, ((NodeGui)board.getNode(index)).Y, RATIO);
+		board.getNode(index).setOccupied(true);
 		_board = board;
 		ship.setLocation(board.getNode(index));
 		ship.setIndex(index);
@@ -79,7 +80,6 @@ public abstract class ShipGui extends GuiElement implements IShip{
 		move();
 		repaint();
 	}
-	
 	
 	public BufferedImage getSpeedNumberImage(){
 		if(getShip() == null)

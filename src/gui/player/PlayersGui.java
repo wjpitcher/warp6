@@ -29,7 +29,8 @@ public class PlayersGui extends JPanel implements IPlayers{
 		for(int i = 0; i < players.getPlayers().length; i++)
 			this.Add(new PlayerGui(players.getPlayers()[i])); 
 		
-		// ((PlayerGui) _players.getPlayers()).setActive(true);
+		if(players.getPlayers().length > 0 )
+		 ((PlayerGui) _players.getPlayers()[0]).setActive(true);
 	}
 	
 	@Override

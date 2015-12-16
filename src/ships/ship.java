@@ -82,7 +82,10 @@ public abstract class Ship implements IShip{
 		else {
 			location.setOccupied(false);
 			System.out.println("before: " + location);
+			int prevIndex = location.index();
 			location = location.move(_speed);
+			if(prevIndex - _speed > location.index())
+				roll();
 			System.out.println("After: " + location);
 			location.setOccupied(true);
 		

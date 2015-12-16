@@ -50,14 +50,8 @@ public class BoardGui extends JPanel
 
 		_board.setNodes(_nodes.getNodes());	
 		for(int i = 0 ; i < _nodes.getNodes().length; i++){
-			if(_nodes.getNodes()[i] != null){
-				
+			if(_nodes.getNodes()[i] != null){	
 				this.add((NodeGui) _nodes.getNodes()[i]);
-				
-				//((NodeGui)_nodes.getNodes()[i]).setVisible(true);
-				
-				//ShipGui ship = new ShipGui(null,(NodeGui) _nodes.getNodes()[i]);
-				//this.add(ship );
 			}
 		}
 			

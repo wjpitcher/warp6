@@ -45,9 +45,11 @@ public class MainForm extends JFrame {
 		Player newPlayer = new Player("Player1", new Color(0x0C9EFF));
 		playerslist.Add(new PlayerGui(newPlayer));
 		
-		playerslist.Add(new PlayerGui("Player2", new Color(0xFF0000)));
+		newPlayer = new Player("Player2", new Color(0xFF0000));
+		playerslist.Add(new PlayerGui(newPlayer));
 		
-		playerslist.Add(new PlayerGui("Player3",new  Color(0x28FF19)));
+		newPlayer = new Player("Player3", new Color(0x28FF19));
+		playerslist.Add(new PlayerGui(newPlayer));
 		
 		this.add( BorderLayout.NORTH,  playerslist );
 		

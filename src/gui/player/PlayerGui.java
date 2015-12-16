@@ -16,8 +16,9 @@ import ships.IShip;
 public class PlayerGui extends JComponent implements IPlayer{
 	private static final long serialVersionUID = 1L;
 	IPlayer _player = null;
-	JLabel _lbl;
-
+	JLabel  _lbl;
+	boolean _activePlayer = false;
+	
 	public PlayerGui(String name, Color color){
 		this(new Player(name, color));
 	}
@@ -31,7 +32,6 @@ public class PlayerGui extends JComponent implements IPlayer{
 		this.setPreferredSize(new Dimension(100, 30));
 		this.setLayout(new FlowLayout());
 		this.add(_lbl);
-		this.setBackground(Color.DARK_GRAY);
 		this.setVisible(true);	
 	}
 	
@@ -41,6 +41,7 @@ public class PlayerGui extends JComponent implements IPlayer{
 		else
 			this.setBorder(null);
 		
+		_activePlayer = ActivePlayer;
 		_lbl.setText(_player.getName() + " " + _player.warpedShips().length );  
 	}
 	
@@ -48,6 +49,12 @@ public class PlayerGui extends JComponent implements IPlayer{
 	public void paint(Graphics g){
 		g.setColor(_player.getColor());
 		g.fillRect(0, 0, this.getWidth() -1, this.getHeight() - 1 );
+		
+		if (_activePlayer){
+			g.setColor(Color.BLACK);
+			g.drawRect(0, 0, this.getWidth() -1, this.getHeight() - 1 );
+		}
+		
 		super.paint(g);
 	}
 
