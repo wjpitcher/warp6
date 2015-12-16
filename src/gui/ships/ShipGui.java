@@ -4,6 +4,7 @@ import ships.IShip;
 import ships.MediumShip;
 
 import java.awt.Graphics;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -12,75 +13,86 @@ import javax.imageio.ImageIO;
 
 import board.INode;
 import board.Node;
+import gui.board.BoardGui;
 import gui.board.GuiElement;
 import gui.board.NodeGui;
 
-public  class ShipGui extends GuiElement implements IShip {
+public abstract class ShipGui extends GuiElement implements IShip{
 	private static final long serialVersionUID = 1L;
-	private static final double RATIO = .255;
+	private static final double RATIO = .05;
 	private IShip _ship;
+	private static BufferedImage[] numberImages = null;
+	private BoardGui _board ;
 	
 	public BufferedImage shipImage = null;
 	
 	public ShipGui(IShip ship, NodeGui node){
 		super(node.X, node.Y, RATIO);
+		ship.setLocation(node);
+		populateNumberImages();
 		_ship = ship;
 	}
-	
+	public ShipGui(IShip ship, BoardGui board, int index){
+		super(((NodeGui)board.getNode(index)).X
+			, ((NodeGui)board.getNode(index)).Y, RATIO);
+		_board = board;
+		ship.setLocation(board.getNode(index));
+		ship.setIndex(index);
+		populateNumberImages();
+		_ship = ship;
+	}
+	 
+	/*
 	public ShipGui(IShip ship, int X, int Y){
 		super(X, Y, RATIO);
+		populateNumberImages();
 		_ship = ship;
 	}
 	
 	public ShipGui(IShip ship, double X, double Y){
 		super(X, Y, RATIO);
+		populateNumberImages();
 		_ship = ship;
 	}
-	
+	*/
 	public IShip getShip(){
 		return _ship;
 	}
-	
-	@Override
-	public BufferedImage getImage() {
-		if(shipImage == null){
-			try {
-				shipImage = ImageIO.read(new File("img\\Ship\\FastshipYellow.png"));
-			} catch (IOException e) {
-				e.printStackTrace();
+
+	private void populateNumberImages(){
+		if(numberImages == null) {	
+			numberImages = new BufferedImage[10];
+			
+			for( int i = 0; i < 10; i++){
+				try {
+					numberImages[i] = ImageIO.read(new File("img\\Ship\\num" + i + ".png"));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		}
-		return shipImage;
-	}
-
-	@Override
-	public BufferedImage getMouseOverImage() {
-		return getImage();
 	}
 	
 	@Override
-	public void paint(Graphics g){
-		String test = "";
-		/*
-		for(int i = 0; i < Thread.currentThread().getStackTrace().length; i++ ){
-			test += Thread.currentThread().getStackTrace()[i].toString() + "\n";
-		}*/
-		System.out.println(this + ": " + test );
-		super.paint(g);
-		
+	public void clicked(){
+		System.out.println("Move");
+		move();
+		repaint();
 	}
-
-	@Override
-	public void paintComponent(Graphics g){
-		String test = "";
-		/*
-		for(int i = 0; i < Thread.currentThread().getStackTrace().length; i++ ){
-			test += Thread.currentThread().getStackTrace()[i].toString() + "\n";
-		}*/
-		System.out.println(this + " component: " + test );
-	//	super.paint(g);
-		
+	
+	
+	public BufferedImage getSpeedNumberImage(){
+		if(getShip() == null)
+			return getNumberImage(0);
+		else
+			return getNumberImage(getShip().getSpeed());
 	}
+	
+	public BufferedImage getNumberImage(int number){
+		return numberImages[number];
+	}
+	
+	protected abstract void updateSpeed();
 	// Ship Methods
 	@Override
 	public int getMaxSpeed() {
@@ -122,18 +134,34 @@ public  class ShipGui extends GuiElement implements IShip {
 	public void setLocation(INode newLocation) {
 		_ship.setLocation(newLocation);
 	}
+	
+	@Override
+	public INode getNode(){ return _ship.getNode(); }
+	
 	@Override
 	public boolean increment() {
-		return _ship.increment();
+		boolean incremented = _ship.increment();
+		updateSpeed();
+		return incremented;	
 	}
 	@Override
 	public boolean decrement() {
-		return _ship.decrement();
+		boolean decrement = _ship.decrement();
+		updateSpeed();
+		return decrement;
 	}
 	@Override
 	public void move() {
-		_ship.move();		
+		System.out.println("Before: " + _ship.getNode().index() + " (" + X + ", " + Y + ")"  );
+		_ship.move();
+		
+
+		if(_ship.getNode().index() == 0)
+			this.setVisible(false);
+		
+		X = ((NodeGui)_ship.getNode()).X;
+		Y = ((NodeGui)_ship.getNode()).Y;
+		
+		updateSpeed();
 	}
-
-
 }

@@ -11,24 +11,20 @@ import player.Players;
 @SuppressWarnings("serial")
 public class PlayersGui extends JPanel implements IPlayers{
 	private IPlayers _players = null;
-
-	public PlayersGui(IPlayers players){
-		this.setLayout(new FlowLayout());
-		_players = new Players();
-		setPlayers(players);
-		this.setPreferredSize(new Dimension(10, 30));
+	
+	public PlayersGui(){
+		this(new Players());
 	}
 	
-
-	public PlayersGui(){
+	public PlayersGui(IPlayers players){
 		this.setLayout(new FlowLayout());
-		_players = new Players();
-		this.setPreferredSize(new Dimension(10, 30));
+		setPlayers(players);
+		this.setPreferredSize(new Dimension(10, 32));
 	}
 	
 	public void setPlayers(IPlayers players){
 		
-		_players = new Players();
+		_players =  players;
 		
 		for(int i = 0; i < players.getPlayers().length; i++)
 			this.Add(new PlayerGui(players.getPlayers()[i])); 
@@ -43,6 +39,10 @@ public class PlayersGui extends JPanel implements IPlayers{
 
 	@Override
 	public void Add(IPlayer player) {
+		
+		if(!(player instanceof PlayerGui))
+			player = new PlayerGui(player);
+		
 		_players.Add(player);
 		this.add((PlayerGui)player);
 	}

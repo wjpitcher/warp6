@@ -1,7 +1,9 @@
 package gui.board;
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -19,10 +21,10 @@ public class NodeGui extends GuiElement implements INode {
 	private BufferedImage imgNormal;
 	private BufferedImage imgMouseOver;
 	
-	public double X;
-	public double Y;
+	//public double X;
+	//public double Y;
 	public INode _node;
-	public boolean paintable = true;
+	public boolean visible = false;
 	
 	public NodeGui(int index, IBoard board, int X, int Y, double ratio){
 		this(new Node(index, board.getNextNode(index), board.getBumpNode(index))
@@ -44,29 +46,34 @@ public class NodeGui extends GuiElement implements INode {
 		super(X, Y, ratio);
 		_node = node;
 		setupImages();
+	
 	//	System.out.println("Node percent Constructor: " + this.toString());
 	}	
 
+	
+	
 	private void setupImages(){
 		imgNormal =  new BufferedImage(25, 25, 1);
-		Graphics g = imgNormal.getGraphics();
+		Graphics2D g = (Graphics2D) imgNormal.getGraphics();
 		
+	//g.setColor(new Color(0,0,0,0));
+		g.setPaint(new Color(0,0,0,0));//(0, 0, 25, 25);
 		g.setColor(Color.RED);
 		g.fillOval(0, 0, 25, 25);
+	//	g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0));
 		
 		g.setColor(Color.PINK);
 		g.drawOval(0, 0, 25, 25);
 
 		g.setColor(Color.BLACK);
 		g.drawString(_node.index()+"", 4, 17);
-		try {
-			imgNormal =  ImageIO.read(new File("img\\Ship\\MediumshipRed.png"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		imgMouseOver =  new BufferedImage(25, 25, 1);
-		g = imgMouseOver.getGraphics();
+		g = (Graphics2D)imgMouseOver.getGraphics();
+		
+		g.setColor(new Color((float)1.0,(float)0.0,(float)0.0,(float)0.5));
+		g.drawRect(0, 0, 25, 25);
+		
 		g.setColor(Color.CYAN);
 		g.fillOval(0, 0, 25, 25);
 		
@@ -75,20 +82,13 @@ public class NodeGui extends GuiElement implements INode {
 		
 		g.setColor(Color.BLACK);
 		g.drawString(_node.index()+ "", 4, 17);
-		
-		try {
-			imgMouseOver =  ImageIO.read(new File("img\\Ship\\FastshipBlue.png"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	
 	}
 
 	@Override
 	public void paint(Graphics g){
-		if(paintable)
+		if(visible)
 			super.paint(g);
-		System.out.println(this + " Node "  );
 	}
 	
 	@Override
@@ -112,40 +112,22 @@ public class NodeGui extends GuiElement implements INode {
 	}
 	
 	@Override
-	public void setNext(INode value) {
-		_node.setNext(value);
-	}
+	public void setNext(INode value) { _node.setNext(value); }
 	@Override
-	public INode Next() {
-		return _node.Next();
-	}
+	public INode Next() { return _node.Next(); }
 	@Override
-	public INode Bump() {
-		return _node.Bump();
-	}
+	public INode Bump() { return _node.Bump(); }
 	@Override
-	public void setBump(INode value) {
-		_node.setBump(value);
-	}
+	public void setBump(INode value) { _node.setBump(value); }
 	@Override
-	public boolean isOccupied() {
-		return _node.isOccupied();
-	}
+	public boolean isOccupied() { return _node.isOccupied(); }
 	@Override
-	public void setOccupied(boolean value) {
-		_node.setOccupied(value);
-	}
+	public void setOccupied(boolean value) { _node.setOccupied(value); }
 	@Override
-	public int index() {
-		return _node.index();
-	}
+	public int index() { return _node.index(); }
 	@Override
-	public boolean moveable(int moves) {
-		return _node.moveable(moves);
-	}
+	public boolean moveable(int moves) { return _node.moveable(moves); }
 	@Override
-	public INode move(int moves) {
-		return _node.move(moves);
-	}
+	public INode move(int moves) { return _node.move(moves); }
 
 }

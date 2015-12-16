@@ -1,6 +1,9 @@
 package gui.player;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Graphics;
 
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
@@ -22,10 +25,14 @@ public class PlayerGui extends JComponent implements IPlayer{
 	public PlayerGui(IPlayer player){
 		_player = player;
 		_lbl = new JLabel(player.getName());
-
-		this.setSize(100, 100);
-		this.setBackground(player.getColor());
+		_lbl.setBackground(player.getColor());
+		System.out.println(_lbl.getPreferredSize());
+		this.setSize(100, 30);
+		this.setPreferredSize(new Dimension(100, 30));
+		this.setLayout(new FlowLayout());
 		this.add(_lbl);
+		this.setBackground(Color.DARK_GRAY);
+		this.setVisible(true);	
 	}
 	
 	public void setActive(boolean ActivePlayer){
@@ -37,6 +44,13 @@ public class PlayerGui extends JComponent implements IPlayer{
 		_lbl.setText(_player.getName() + " " + _player.warpedShips().length );  
 	}
 	
+	@Override
+	public void paint(Graphics g){
+		g.setColor(_player.getColor());
+		g.fillRect(0, 0, this.getWidth() -1, this.getHeight() - 1 );
+		super.paint(g);
+	}
+
 	@Override
 	public String getName(){
 		return _player.getName();

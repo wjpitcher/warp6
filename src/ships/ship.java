@@ -20,9 +20,10 @@ public abstract class Ship implements IShip{
 		roll();
 	}
 
-	public Ship(int maxSpeed, int points, Node location){
+	public Ship(int maxSpeed, int points, INode location){
 		this(maxSpeed, points);
 		this.location = location;
+		location.setOccupied(true);
 	}
 
 	@Override
@@ -54,6 +55,9 @@ public abstract class Ship implements IShip{
 	public void setLocation(INode newLocation){ location = newLocation; }
 	
 	@Override
+	public INode getNode(){ return location ; }
+	
+	@Override
 	public boolean increment(){
 		if(!incrementable())
 			return false;
@@ -75,8 +79,14 @@ public abstract class Ship implements IShip{
 			location = null;
 			_points = 0;
 		}
-		else 
-			location.move(_speed);
+		else {
+			location.setOccupied(false);
+			System.out.println("before: " + location);
+			location = location.move(_speed);
+			System.out.println("After: " + location);
+			location.setOccupied(true);
+		
+		}
 	}
 	
 	private void roll(){

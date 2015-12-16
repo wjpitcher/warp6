@@ -19,8 +19,9 @@ public interface IShip {
 	public int getIndex();
 
 	public void setIndex(int index);
-	
+
 	public void setLocation(INode newLocation);
+	public INode getNode();
 	public boolean increment();
 
 	public boolean decrement();

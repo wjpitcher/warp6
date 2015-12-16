@@ -21,9 +21,4 @@ public class FastShip extends Ship {
 	public FastShip(){
 		super(_MAXSPEED, _POINTS);
 	}
-	
-	
-	public int getSpeed() {
-		return 8;
-	}
 }

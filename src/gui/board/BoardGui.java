@@ -16,6 +16,9 @@ import board.Board;
 import board.IBoard;
 import board.INode;
 import gui.ships.FastShipGui;
+import gui.ships.MediumShipGui;
+import gui.ships.ShipGui;
+import gui.ships.SlowShipGui;
 
 public class BoardGui extends JPanel 
  implements IBoard {
@@ -51,21 +54,24 @@ public class BoardGui extends JPanel
 				
 				this.add((NodeGui) _nodes.getNodes()[i]);
 				
-				((NodeGui)_nodes.getNodes()[i]).setVisible(true);
+				//((NodeGui)_nodes.getNodes()[i]).setVisible(true);
+				
+				//ShipGui ship = new ShipGui(null,(NodeGui) _nodes.getNodes()[i]);
+				//this.add(ship );
 			}
 		}
 			
-		/*
-		FastShipGui fastShip = new FastShipGui(Color.blue, (NodeGui)_nodes.getNodes()[5]);
-		this.add(fastShip );
-		*/
+		/*		*/
+		ShipGui ship = new SlowShipGui(Color.blue, this, 126);
+		this.add(ship );
 		
-		/*
-		System.out.println("Add Test");
-		add(new GuiElement(.25, .25, .25));
-		NodeGui testnode =new NodeGui(1, new Board(), .5, .5, .25) ;
-		add(testnode);
-		*/
+		
+		ship = new MediumShipGui(Color.red, this, 124);
+		this.add(ship);
+
+		ship = new FastShipGui(Color.green, this, 125);
+		this.add(ship);
+		ship.move();
 	}
 
 	@Override

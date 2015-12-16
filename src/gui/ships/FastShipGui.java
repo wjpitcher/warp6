@@ -1,48 +1,49 @@
 package gui.ships;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import gui.board.BoardGui;
 import gui.board.NodeGui;
 import ships.FastShip;
+import ships.SlowShip;
 
 public class FastShipGui extends ShipGui {
 	private static final long serialVersionUID = 1L;
-
+	
+	public BufferedImage baseshipImage;
 	public BufferedImage shipImage;
-
-	public FastShipGui(Color playerColor, int X, int Y){
-		super(new FastShip(), X, Y);
-		setShipColor(playerColor);
-	}
-
-	public FastShipGui(Color playerColor, double X, double Y){
-		super(new FastShip(), X, Y);
-		setShipColor(playerColor);
-	}
+	public BufferedImage shipOverImage;
 
 	public FastShipGui(Color playerColor, NodeGui node){
 		super(new FastShip(node), node);
 		setShipColor(playerColor);
 	}
 
+	public FastShipGui(Color playerColor, BoardGui board, int index){
+		super(new FastShip(), board, index);
+		setShipColor(playerColor);
+	}
+	
 	public void setShipColor(Color playerColor){
 		try {
 			if(playerColor == Color.BLUE)
-				shipImage = ImageIO.read(new File("img\\Ship\\FastshipBlue.png"));
+				baseshipImage = ImageIO.read(new File("img\\Ship\\FastshipBlue.png"));
 			else if(playerColor == Color.RED)
-				shipImage = ImageIO.read(new File("img\\Ship\\FastshipRed.png")); 
+				baseshipImage = ImageIO.read(new File("img\\Ship\\FastshipRed.png")); 
 			else if(playerColor == Color.YELLOW)
-				shipImage = ImageIO.read(new File("img\\Ship\\FastshipYellow.png")); 
+				baseshipImage = ImageIO.read(new File("img\\Ship\\FastshipYellow.png")); 
 			else if(playerColor == Color.GREEN)
-				shipImage = ImageIO.read(new File("img\\Ship\\FastshipGreen.png")); 
+				baseshipImage = ImageIO.read(new File("img\\Ship\\FastshipGreen.png")); 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		updateSpeed();
 	}
 
 	@Override
@@ -52,6 +53,14 @@ public class FastShipGui extends ShipGui {
 
 	@Override
 	public BufferedImage getMouseOverImage() {
-		return shipImage;
+		return shipOverImage;
+	}
+	
+	@Override
+	protected void updateSpeed(){
+		shipImage = baseshipImage;
+		Graphics g = shipImage.getGraphics();
+		g.drawImage(getSpeedNumberImage(), 0, 0, null);
+		shipOverImage = shipImage;
 	}
 }

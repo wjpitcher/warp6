@@ -49,6 +49,10 @@ public class NodesGui {
 		if(_nodes.length == _lastNode)
 			_nodes = Arrays.copyOf(_nodes, _nodes.length * 2);
 		_board.add(node);
+		if(node.index() > 0){
+			node.setNext(_nodes[_board.getNextNode(node.index()).index()]);
+			node.setBump(_nodes[_board.getBumpNode(node.index()).index()]);
+		}
 		_nodes[_lastNode] = node;
 		_lastNode++;
 	}
