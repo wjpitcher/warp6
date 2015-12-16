@@ -16,7 +16,9 @@ import gui.board.NodeGui;
 import gui.player.PlayerGui;
 import gui.player.PlayersGui;
 import gui.ships.FastShipGui;
+import gui.ships.MediumShipGui;
 import gui.ships.ShipGui;
+import gui.ships.SlowShipGui;
 import layoutMangers.SingleFitLayout;
 import player.Player;
 
@@ -40,7 +42,6 @@ public class MainForm extends JFrame {
 				             , screenSize.height)/4 * 3;
 		
 		setSize(formsize, formsize);
-		
 	
 		Player newPlayer = new Player("Player1", new Color(0x0C9EFF));
 		playerslist.Add(new PlayerGui(newPlayer));
@@ -53,28 +54,49 @@ public class MainForm extends JFrame {
 		
 		this.add( BorderLayout.NORTH,  playerslist );
 		
-		this.add( "Center", boardPanel);
-/*
-	JPanel elemTest = new JPanel();
-		elemTest.setSize(new Dimension(100, 100));
-		elemTest.setPreferredSize(new Dimension(100, 100));
-		elemTest.setBackground(Color.PINK);
-		elemTest.add(new PlayerGui("Player2", Color.red));
-		System.out.println(elemTest.getComponent(0).getX() + ", " + elemTest.getComponent(0).getY() + ", "
-				         + elemTest.getComponent(0).getWidth() + ", " + elemTest.getComponent(0).getHeight() + elemTest.getComponent(0).getBackground()) ;
-		//	elemTest.add(new ShipGui(null, .25, .75));
+		board.add(new SlowShipGui(Color.blue, board, 126));
+		board.add(new MediumShipGui(Color.red, board, 125));
+		board.add(new SlowShipGui(Color.green, board, 124));
 		
-	//	elemTest.add(new ShipGui(null, 50, 50));
-		//elemTest.add(new NodeGui(1, new Board(), .5, .5, .25));	
-	//	this.add( "East", elemTest);
-		/*	
+		board.add(new FastShipGui(Color.blue, board, 123));
+		board.add(new SlowShipGui(Color.red, board, 122));
+		board.add(new MediumShipGui(Color.green, board, 121));
+		
+		board.add(new SlowShipGui(Color.blue, board, 120));
+		board.add(new FastShipGui(Color.red, board, 119));
+		board.add(new SlowShipGui(Color.green, board, 118));
+		
+		board.add(new MediumShipGui(Color.blue, board, 117));
+		board.add(new SlowShipGui(Color.red, board, 116));
+		board.add(new FastShipGui(Color.green, board, 115));
+		
+		board.add(new SlowShipGui(Color.blue, board, 114));
+		board.add(new MediumShipGui(Color.red, board, 113));
+		board.add(new SlowShipGui(Color.green, board, 112));
+		
+		board.add(new FastShipGui(Color.blue, board, 111));
+		board.add(new MediumShipGui(Color.red, board, 110));
+		board.add(new SlowShipGui(Color.green, board, 109));
+		
+		board.add(new MediumShipGui(Color.blue, board, 108));
+		board.add(new SlowShipGui(Color.red, board, 107));
+		board.add(new MediumShipGui(Color.green, board, 106));		
+		
+		board.add(new SlowShipGui(Color.blue, board, 105));
+		board.add(new FastShipGui(Color.red, board, 104));
+		board.add(new MediumShipGui(Color.green, board, 103));		
+
+		board.add(new MediumShipGui(Color.blue, board, 102));
+		board.add(new SlowShipGui(Color.red, board, 101));
+		board.add(new FastShipGui(Color.green, board, 100));		
 	
-		this.add( "East", elemTest);
-	
-	*/	
+		this.add( "Center", boardPanel);
+
 		
 		this.setIconImage(new ImageIcon("img/Warp6Icon.png").getImage());
 		
 		this.setVisible(setVisible);
 	}
+	
+	
 }

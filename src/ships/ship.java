@@ -84,6 +84,8 @@ public abstract class Ship implements IShip{
 			System.out.println("before: " + location);
 			int prevIndex = location.index();
 			location = location.move(_speed);
+			
+			// if the ship moved further than its speed then it was bumped in which a roll is required
 			if(prevIndex - _speed > location.index())
 				roll();
 			System.out.println("After: " + location);

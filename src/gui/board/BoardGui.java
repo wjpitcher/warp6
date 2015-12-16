@@ -54,18 +54,6 @@ public class BoardGui extends JPanel
 				this.add((NodeGui) _nodes.getNodes()[i]);
 			}
 		}
-			
-		/*		*/
-		ShipGui ship = new SlowShipGui(Color.blue, this, 126);
-		this.add(ship );
-		
-		
-		ship = new MediumShipGui(Color.red, this, 124);
-		this.add(ship);
-
-		ship = new FastShipGui(Color.green, this, 125);
-		this.add(ship);
-		ship.move();
 	}
 
 	@Override
